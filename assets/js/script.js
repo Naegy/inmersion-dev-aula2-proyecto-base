@@ -31,13 +31,21 @@ function actualizarLista(){
         //console.log(posicion);
         const valorGasto= Number(listaValorGastos[posicion]);
 
+     if(valorGasto>150){
+        
+        alert("Advertencia Valor muy grande");
+        return;
+
+     }
     htmlLista +=  `<li>${elemento} -  USD ${valorGasto.toFixed(2)}  
     
     <button onclick="Botonborrar(${posicion});">Eliminar</button>
     
     
     </li> `;
-  
+     
+
+
       // sumatoria de gastos
     totalGastos+=Number(valorGasto);
 
@@ -45,9 +53,11 @@ function actualizarLista(){
 
     });   
 
+ 
     listaElementos.innerHTML=htmlLista;
     totalElemento.innerHTML=totalGastos.toFixed(2);
     clean();
+  
 
 }
 
