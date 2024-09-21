@@ -2,6 +2,7 @@ let listaNombreGastos=[];
 let listaValorGastos=[];
 let listaDescripciones=[];
 let indiceModificacion = null;
+
 let botonActu= document.getElementById('botonActualizar');
 let botonform=document.getElementById("botonFormulario");
 
@@ -13,13 +14,17 @@ let descripcion=document.getElementById("descripcionGasto").value;
 
 //console.log(nombreGasto);//verifico ingreso de datos
 //console.log(valorGasto); //verifico ingreso de datos
-//alert("click del usuario"); verificando funcion
+//alert("click del usuario"); verificando function
 listaNombreGastos.push(nombreGasto);
 listaValorGastos.push(valorGasto);
 listaDescripciones.push(descripcion);
 //console.log(listaNombreGastos); valores en mi arreglo
 //console.log(listaValorGastos); valores en mi arreglo
 //console.log(listaDescripciones); 
+if (valorGasto>150){
+  alert("Advertencia Gasto Supera 150$");
+}
+
 
 actualizarLista();
 
@@ -42,11 +47,7 @@ function actualizarLista(){
       const descripcion=listaDescripciones[posicion];
       const valorGasto= Number(listaValorGastos[posicion]);
       
-      if (valorGasto>150){
-        alert("Advertencia Gasto demasiado Grande");
-        return;
-      }
-    
+     
     htmlLista +=  `<li>${elemento} descripcion: ${descripcion} USD ${valorGasto.toFixed(2)} 
 
     <button onclick="Botonborrar(${posicion});">Eliminar</button>
@@ -89,7 +90,10 @@ function botonEditar(posicion){
   document.getElementById('valorGasto').value = listaValorGastos[posicion];
   document.getElementById('descripcionGasto').value = listaDescripciones[posicion];
 
-  indiceModificacion = posicion; // almaceno mi posicion actual 
+  indiceModificacion = posicion;    // almaceno mi posicion actual 
+
+
+  cambiarBotonesActualizar();
   //listaNombreGastos.push(nombreGasto);
   //listaValorGastos.push(valorGasto);
   //listaDescripciones.push(descripcion);
@@ -130,17 +134,22 @@ if (indiceModificacion !== null) {  // si indice seleccionado diferente de vacio
   listaNombreGastos[indiceModificacion] = document.getElementById("nombreGasto").value;
   listaValorGastos[indiceModificacion] = document.getElementById("valorGasto").value;
   listaDescripciones[indiceModificacion] = document.getElementById("descripcionGasto").value;
-
-  actualizarLista();
   
+  actualizarLista();
+  cambiarBotonesGuardar();
 }
 
       
 
 }
 
-///function cambiarBotones(){
- // botonform.style.display = 'none'
- // botonActu.style.display = 'block'
-//}
+function cambiarBotonesActualizar(){
+botonform.style.display = 'none'
+botonActu.style.display = 'block'
+}
+
+function cambiarBotonesGuardar(){
+  botonform.style.display = 'block'
+  botonActu.style.display = 'none'
+  }
 
